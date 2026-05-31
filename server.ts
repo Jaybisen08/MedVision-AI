@@ -16,6 +16,8 @@ const PORT = 3000;
 // Increase request size limit to handle uploaded base64 data (PDFs / Images)
 app.use(express.json({ limit: "25mb" }));
 
+const apiRouter = express.Router();
+
 // Helper to lazy-initialize and secure the Gemini client
 function getGeminiClient() {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -33,7 +35,7 @@ function getGeminiClient() {
 }
 
 // 1. API Route: Analyze Medical Report (Blood tests, Prescriptions, PDFs, Images)
-app.post("/api/analyze-report", async (req, res) => {
+apiRouter.post("/analyze-report", async (req, res) => {
   try {
     const { fileName, mimeType, base64Data, patient } = req.body;
 
@@ -132,7 +134,7 @@ Always write in a compassionate, friendly, and non-alarmist tone. Ensure all fie
 });
 
 // 2. API Route: Analyze Symptoms
-app.post("/api/analyze-symptoms", async (req, res) => {
+apiRouter.post("/analyze-symptoms", async (req, res) => {
   try {
     const { symptoms, description, patient } = req.body;
 
@@ -215,7 +217,7 @@ Ensure the disclaimer "This is not a medical diagnosis. Consult a healthcare pro
 });
 
 // 3. API Route: Generate Health & Lifestyle Recommendations
-app.post("/api/generate-recommendations", async (req, res) => {
+apiRouter.post("/generate-recommendations", async (req, res) => {
   try {
     const { reportAnalysis, symptomAnalysis, patient } = req.body;
 
@@ -293,6 +295,9 @@ Write in simple, constructive, non-pharmaceutical, lifestyle-focused language.`;
   }
 });
 
+app.use("/api", apiRouter);
+app.use("/", apiRouter);
+
 // Export app for serverless deployment platforms like Vercel
 export default app;
 
@@ -323,4 +328,7 @@ async function setupServer() {
   });
 }
 
-setupServer();
+// Only start the standalone listener if NOT running inside Vercel Serverless Functions
+if (!process.env.VERCEL && !process.env.NOW_REGION) {
+  setupServer();
+}

@@ -294,8 +294,16 @@ Write in simple, constructive, non-pharmaceutical, lifestyle-focused language.`;
   }
 });
 
+// Export app for serverless deployment platforms like Vercel
+export default app;
+
 // Setup development server or serve built client static assets
 async function setupServer() {
+  if (process.env.VERCEL) {
+    // Vercel serverless functions shouldn't start their own listeners
+    return;
+  }
+
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },

@@ -13,6 +13,8 @@ import { generateMedicalPdf } from "../utils/pdf";
 import ReportAnalyzer from "./ReportAnalyzer";
 import SymptomTracker from "./SymptomTracker";
 import Recommendations from "./Recommendations";
+import HealthInsightsCard from "./HealthInsightsCard";
+import ClinicalSummaryPanel from "./ClinicalSummaryPanel";
 
 interface DashboardProps {
   initialDemo: boolean;
@@ -296,6 +298,18 @@ export default function Dashboard({ initialDemo, onBackToLanding }: DashboardPro
                 <span>Download Clinical PDF</span>
               </button>
             </div>
+
+            {/* AI Health Insights Card */}
+            <HealthInsightsCard reportAnalysis={medicalCase.reportAnalysis} />
+
+            {/* AI Clinical Summary Panel - Display after report analysis */}
+            {medicalCase.reportAnalysis && (
+              <ClinicalSummaryPanel 
+                reportAnalysis={medicalCase.reportAnalysis} 
+                onGeneratePdf={triggerPdfDownload} 
+                onNavigateTab={setActiveTab}
+              />
+            )}
 
             {/* Quick Demo Assist notes */}
             <div className="p-4 rounded-xl bg-[#CAF0F8]/10 border border-[#90E0EF]/40 text-left">

@@ -859,6 +859,155 @@ export default function LandingPage({ onStart }: LandingPageProps) {
         </div>
       </section>
 
+      {/* SECTION 9 — WHY MEDVISION AI? */}
+      <section className="py-24 bg-[#FFFFFF] relative overflow-hidden px-4 sm:px-6 lg:px-8 border-b border-slate-100">
+        {/* Decorative ambient blobs in background */}
+        <div className="absolute top-1/2 left-0 w-72 h-72 bg-[#CAF0F8]/30 rounded-full blur-3xl -z-10" />
+        <div className="absolute top-1/2 right-0 w-72 h-72 bg-[#90E0EF]/20 rounded-full blur-3xl -z-10" />
+
+        <div className="max-w-7xl mx-auto text-center space-y-16">
+          {/* Header */}
+          <div className="space-y-4 max-w-2xl mx-auto">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-xs font-bold text-[#0077B6] bg-[#CAF0F8] px-3.5 py-1.5 rounded-full inline-block font-mono uppercase tracking-widest"
+            >
+              ★ Comparative Transformation
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-[#03045E]"
+            >
+              Why Choose MedVision AI?
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-slate-500 text-sm sm:text-base font-sans leading-relaxed"
+            >
+              Healthcare information should be understandable by everyone.
+            </motion.p>
+          </div>
+
+          {/* Large Split Screen Grid with Center Arrow */}
+          <div className="grid lg:grid-cols-11 gap-8 items-center relative">
+            
+            {/* Left Card: Traditional Healthcare Experience */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, translateY: -4 }}
+              transition={{ type: "spring", stiffness: 100, damping: 15 }}
+              className="lg:col-span-5 bg-white backdrop-blur-md border border-slate-200 rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden text-left"
+            >
+              <div className="absolute top-0 right-0 p-4 bg-slate-100 text-[10px] font-mono text-slate-500 font-bold uppercase rounded-bl-2xl tracking-wider">
+                Old Friction
+              </div>
+              <h3 className="text-xl font-extrabold text-slate-700 mb-8 flex items-center gap-2.5">
+                <span className="p-2 rounded-xl bg-slate-100 text-slate-500 text-base">🏥</span>
+                <span>Traditional Healthcare Experience</span>
+              </h3>
+              
+              <ul className="space-y-6">
+                {[
+                  { emoji: "😕", text: "Confusing Medical Reports" },
+                  { emoji: "📄", text: "Complex Medical Terminology" },
+                  { emoji: "🔍", text: "Endless Internet Searches" },
+                  { emoji: "⏰", text: "Time Consuming Research" },
+                  { emoji: "📊", text: "Difficult Report Interpretation" }
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-4 text-slate-400 font-medium opacity-75 filter blur-[0.3px] transition-all duration-300">
+                    <span className="text-2xl flex-shrink-0">{item.emoji}</span>
+                    <span className="text-sm sm:text-base tracking-wide font-sans">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Center Animated Glowing Arrow */}
+            <div className="lg:col-span-1 flex flex-col items-center justify-center py-4 lg:py-0 relative z-10">
+              <motion.div
+                animate={{
+                  scale: [1, 1.1, 1],
+                  boxShadow: [
+                    "0 0 10px rgba(0, 119, 182, 0.2)",
+                    "0 0 25px rgba(0, 119, 182, 0.6)",
+                    "0 0 10px rgba(0, 119, 182, 0.2)"
+                  ]
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-r from-[#0077B6] to-[#00B4D8] text-white flex flex-col items-center justify-center font-bold shadow-lg transform rotate-90 lg:rotate-0"
+              >
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#CAF0F8] mb-0.5 leading-none">To</span>
+                <span className="text-lg font-black leading-none">➔</span>
+              </motion.div>
+              
+              {/* Confusion to Clarity Badge below the arrow */}
+              <div className="absolute mt-20 lg:mt-24 bg-white border border-[#90E0EF]/40 px-3 py-1.5 rounded-full shadow-sm text-[10px] sm:text-xs font-extrabold text-[#0077B6] whitespace-nowrap tracking-wide leading-none select-none">
+                Confusion <span className="text-slate-400 mx-1">➔</span> Clarity
+              </div>
+            </div>
+
+            {/* Right Card: MedVision AI Experience */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, translateY: -4 }}
+              transition={{ type: "spring", stiffness: 100, damping: 15 }}
+              className="lg:col-span-5 bg-gradient-to-br from-white to-[#CAF0F8]/20 backdrop-blur-md border border-[#90E0EF] rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden text-left"
+            >
+              <div className="absolute top-0 right-0 w-36 h-36 bg-[#CAF0F8] rounded-full blur-3xl -z-10 opacity-60" />
+
+              <div className="absolute top-0 right-0 p-4 bg-[#CAF0F8] text-[10px] font-mono text-[#0077B6] font-bold uppercase rounded-bl-2xl tracking-wider">
+                AI Empowered
+              </div>
+              
+              <h3 className="text-xl font-extrabold text-[#03045E] mb-8 flex items-center gap-2.5">
+                <span className="p-2 rounded-xl bg-[#CAF0F8] text-[#0077B6] text-base">🤖</span>
+                <span>MedVision AI Experience</span>
+              </h3>
+              
+              <ul className="space-y-6">
+                {[
+                  { emoji: "✅", text: "Simple AI Explanations" },
+                  { emoji: "🤖", text: "Instant Report Analysis" },
+                  { emoji: "💡", text: "Personalized Recommendations" },
+                  { emoji: "📑", text: "Professional PDF Summaries" },
+                  { emoji: "⚡", text: "Results in Seconds" }
+                ].map((item, idx) => (
+                  <motion.li
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * idx, duration: 0.4 }}
+                    className="flex items-center gap-4 text-[#03045E] font-bold hover:translate-x-1.5 transition-transform"
+                  >
+                    <span className="text-2xl flex-shrink-0 scale-105 filter drop-shadow">{item.emoji}</span>
+                    <span className="text-sm sm:text-base tracking-wide font-sans">{item.text}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Classic How It Works Timeline Segment */}
       <section className="bg-slate-50 border-b border-slate-100 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center space-y-12">

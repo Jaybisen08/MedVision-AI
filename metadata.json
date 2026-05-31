@@ -1,0 +1,6 @@
+{
+  "name": "MedVision AI",
+  "description": "An AI-powered healthcare application for medical report analysis, symptom tracking, lifestyle recommendations, and professional PDF summary generation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

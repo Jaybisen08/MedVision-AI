@@ -46,11 +46,32 @@ export default function Recommendations({
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Server responded with status ${response.status}`);
+        let errorMsg = `Server responded with status ${response.status}`;
+        try {
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            const errorData = await response.json();
+            errorMsg = errorData.error || errorMsg;
+          } else {
+            const textData = await response.text();
+            errorMsg = textData.length > 200 ? textData.substring(0, 200) + "..." : textData;
+          }
+        } catch (e) {
+          errorMsg = `Server responded with status ${response.status} (Failed to parse error description)`;
+        }
+        throw new Error(errorMsg);
       }
 
-      const data: HealthRecommendations = await response.json();
+      let data: HealthRecommendations;
+      try {
+        data = await response.json();
+      } catch (jsonErr: any) {
+        let textData = "";
+        try {
+          textData = await response.text();
+        } catch (e) {}
+        throw new Error(`Failed to parse response as JSON. ${jsonErr.message}. Content preview: ${textData.substring(0, 150)}`);
+      }
       onGenerationSuccess(data);
     } catch (err: any) {
       console.error(err);
